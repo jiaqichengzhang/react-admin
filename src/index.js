@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from "react-redux";
+import store from './redux/store'
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import memoryUtils from './utils/memoryUtils'
+import storageUtils from './utils/storageUtils'
+import './assets/css/index.css';
+
+// 从local中保存user到memory
+memoryUtils.user = storageUtils.getUser()
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>,
+    document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
